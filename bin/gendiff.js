@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import program from 'commander' ;
+import program from 'commander';
 import genDiff from '../src/index.js';
 
 program
@@ -7,8 +7,6 @@ program
   .option('-f, --format <type>', 'output format')
   .description(' Compares two configuration files and shows a difference.')
   .arguments('<filePath1> <filePath2>')
-  .action((filePath1, filePath2) => {
-    return genDiff(filePath1, filePath2);
-  });
+  .action((filePath1, filePath2) => genDiff(filePath1, filePath2));
 
 program.parse(process.argv);
