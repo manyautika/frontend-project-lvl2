@@ -3,6 +3,7 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export default (file1, file2) => {
+  console.log(path.resolve(file1));
   const one = JSON.parse(fs.readFileSync(path.resolve(file1), 'utf-8'));
   const two = JSON.parse(fs.readFileSync(path.resolve(file2), 'utf-8'));
   const oneKeys = Object.keys(one);
