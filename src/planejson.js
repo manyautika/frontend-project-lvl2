@@ -13,10 +13,10 @@ export default (file1, file2) => {
     if (one[key] === two[key]) {
       return `  ${key}: ${one[key]}`;
     }
-    if (!one.hasOwnProperty(key)) {
+    if (!_.has(one, key)) {
       return `+ ${key}: ${two[key]}`;
     }
-    if (!two.hasOwnProperty(key)) {
+    if (!_.has(two, key)) {
       return `- ${key}: ${one[key]}`;
     }
     return `- ${key}: ${one[key]}\n+ ${key}: ${two[key]}`;
