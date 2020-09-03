@@ -1,3 +1,3 @@
-import planejson from './planejson.js';
+import planejson from './plane-file.js';
 
 export default planejson;
