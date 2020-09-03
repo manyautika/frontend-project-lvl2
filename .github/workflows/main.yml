@@ -31,7 +31,7 @@ jobs:
     - name: Test & publish code coverage
       run: make test
 
-- name: Test & publish code coverage
+    - name: Test & publish code coverage
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
         uses: paambaati/codeclimate-action@v2.6.0
