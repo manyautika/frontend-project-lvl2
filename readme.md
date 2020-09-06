@@ -12,4 +12,10 @@
 * Mac/Linux
 * Node & npm
 
-[![asciicast](https://asciinema.org/a/5YlVFzaJNeF8F1uQwv81pj5C5.svg)](https://asciinema.org/a/5YlVFzaJNeF8F1uQwv81pj5C5)
+### Compare two .yaml files
+
+[![asciicast](https://asciinema.org/a/358064.svg)](https://asciinema.org/a/358064)
+
+### Compare two .json files
+
+[![asciicast](https://asciinema.org/a/358066.svg)](https://asciinema.org/a/358066)
