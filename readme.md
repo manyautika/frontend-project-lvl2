@@ -12,10 +12,14 @@
 * Mac/Linux
 * Node & npm
 
-### Compare two .yaml files
+#### Compare two .yaml files
 
 [![asciicast](https://asciinema.org/a/358064.svg)](https://asciinema.org/a/358064)
 
-### Compare two .json files
+#### Compare two .json files
 
 [![asciicast](https://asciinema.org/a/358066.svg)](https://asciinema.org/a/358066)
+
+#### Compare two .ini files
+
+[![asciicast](https://asciinema.org/a/358119.svg)](https://asciinema.org/a/358119)
