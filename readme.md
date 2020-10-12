@@ -18,7 +18,7 @@
 
 #### Compare two .json files
 
-[![asciicast](https://asciinema.org/a/358066.svg)](https://asciinema.org/a/358066)
+[![asciicast](https://asciinema.org/a/364905.svg)](https://asciinema.org/a/364905)
 
 #### Compare two .ini files
 
