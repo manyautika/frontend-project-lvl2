@@ -23,3 +23,7 @@
 #### Compare two .ini files
 
 [![asciicast](https://asciinema.org/a/358119.svg)](https://asciinema.org/a/358119)
+
+#### Use different type of formatters
+
+[![asciicast](https://asciinema.org/a/365650.svg)](https://asciinema.org/a/365650)

@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const isObject = (item) => typeof item === 'object';
 
-const nodeWriter = (key, first, second, f) => {
+const nodeWriter = (key, first, second, buildAST) => {
   //  unchanged
   if (JSON.stringify(first[key]) === JSON.stringify(second[key])) {
     return {
@@ -11,36 +11,36 @@ const nodeWriter = (key, first, second, f) => {
       value: first[key],
     };
   }
-  //  recursion
+  //  nested (recursion)
   if (isObject(first[key]) && isObject(second[key])) {
     return {
       key,
       state: 'nested',
-      children: f(first[key], second[key]),
+      children: buildAST(first[key], second[key]),
     };
   }
-  //  added/deleted
+  //  added/removed
   if (!_.has(first, key) || !_.has(second, key)) {
     const added = {
       key,
       state: 'added',
       value: second[key],
     };
-    const deleted = {
+    const removed = {
       key,
-      state: 'deleted',
+      state: 'removed',
       value: first[key],
     };
-    return _.has(first, key) ? deleted : added;
+    return _.has(first, key) ? removed : added;
   }
-  //  modified
-  const modiff = {
+  //  updated
+  const updated = {
     key,
-    state: 'modified',
+    state: 'updated',
     valueBefore: first[key],
     valueAfter: second[key],
   };
-  return modiff;
+  return updated;
 };
 
 const buildAST = (obj1, obj2) => {

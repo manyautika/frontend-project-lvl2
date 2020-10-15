@@ -17,20 +17,14 @@ const valueFormater = (data, space) => {
   return `{${result.join('')}\n${buildSpace(currentSpace - 1)}}`;
 };
 const stateFunc = {
-  nested: (node, space, func) => {
+  nested: (node, space, stylish) => {
     const currentSpace = space + 2;
-    return [buildSpace(space), '  ', node.key, ': {', '\n', func(node.children, currentSpace), buildSpace(currentSpace - 1), '}\n'];
+    return [buildSpace(space), '  ', node.key, ': {\n', stylish(node.children, currentSpace), buildSpace(currentSpace - 1), '}\n'];
   },
   unchanged: (node, space) => [buildSpace(space), '  ', node.key, ': ', valueFormater(node.value, space), '\n'],
   added: (node, space) => [buildSpace(space), '+ ', node.key, ': ', valueFormater(node.value, space), '\n'],
-  deleted: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.value, space), '\n'],
-  modified: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.valueBefore, space), '\n', buildSpace(space), '+ ', node.key, ': ', valueFormater(node.valueAfter, space), '\n'],
+  removed: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.value, space), '\n'],
+  updated: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.valueBefore, space), '\n', buildSpace(space), '+ ', node.key, ': ', valueFormater(node.valueAfter, space), '\n'],
 };
-const stylish = (ast, space = 1) => {
-  const arr = ast.flatMap((node) => {
-    const current = stateFunc[node.state](node, space, stylish);
-    return current;
-  });
-  return arr.join('');
-};
+const stylish = (ast, space = 1) => ast.flatMap((node) => stateFunc[node.state](node, space, stylish)).join('');
 export default (ast) => `{\n${stylish(ast)}}`;

@@ -1,11 +1,12 @@
 import buildAST from './buildAST.js';
 import parse from './parsers.js';
-import stylish from './stylish.js';
+import formatters from './formatters/index.js';
 
-export default (file1, file2) => {
+export default (file1, file2, formater = 'stylish') => {
   const obj1 = parse(file1);
   const obj2 = parse(file2);
   const ast = buildAST(obj1, obj2);
-  console.log(stylish(ast));
-  return stylish(ast);
+  const diff = formatters(formater)(ast);
+  console.log(diff);
+  return diff;
 };
