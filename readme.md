@@ -24,6 +24,12 @@
 
 [![asciicast](https://asciinema.org/a/358119.svg)](https://asciinema.org/a/358119)
 
-#### Use different type of formatters
+#### Use different type of formatters for example:
+
+#### plain
 
 [![asciicast](https://asciinema.org/a/365650.svg)](https://asciinema.org/a/365650)
+
+#### json
+
+[![asciicast](https://asciinema.org/a/366302.svg)](https://asciinema.org/a/366302)
