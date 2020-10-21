@@ -51,7 +51,7 @@ const buildAST = (obj1, obj2) => {
     const currentNode = nodeWriter(key, obj1, obj2, buildAST);
     return [...acc, currentNode];
   }, []);
-  console.log(JSON.stringify(result));
+  // console.log(JSON.stringify(result));
   return result;
 };
 export default buildAST;

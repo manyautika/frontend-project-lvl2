@@ -19,15 +19,15 @@ const stateFunc = (state, keys, data) => {
   return states[state](data);
 };
 export default (ast) => {
-  const plane = (arr, keys = []) => {
+  const plain = (arr, keys = []) => {
     const result = arr.reduce((acc, node) => {
       const keyLine = [...keys, node.key];
       if (node.state === 'nested') {
-        return [...acc, ...plane(node.children, keyLine)];
+        return [...acc, ...plain(node.children, keyLine)];
       }
       return [...acc, stateFunc(node.state, keyLine, node)];
     }, []);
     return result;
   };
-  return plane(ast).filter(Boolean).join('\n');
+  return plain(ast).filter(Boolean).join('\n');
 };
