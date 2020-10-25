@@ -1,3 +1,4 @@
+/* eslint no-restricted-syntax: ["off", "ForOfStatement"] */
 import { test, expect } from '@jest/globals';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
