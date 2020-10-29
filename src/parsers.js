@@ -1,12 +1,7 @@
-import path from 'path';
-import fs from 'fs';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (pathToFile) => {
-  const fullPath = path.resolve(pathToFile);
-  const content = fs.readFileSync(fullPath, 'utf-8');
-  const format = path.extname(fullPath);
+export default (content, format) => {
   const parseFunctions = {
     '.yaml': yaml.safeLoad,
     '.yml': yaml.safeLoad,

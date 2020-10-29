@@ -43,15 +43,14 @@ const nodeWriter = (key, first, second, buildAST) => {
   return updated;
 };
 
-const buildAST = (obj1, obj2) => {
-  const firstKeys = Object.keys(obj1);
-  const secondKeys = Object.keys(obj2);
+const buildAST = (data1, data2) => {
+  const firstKeys = Object.keys(data1);
+  const secondKeys = Object.keys(data2);
   const bothFilesKeys = _.union(firstKeys, secondKeys).sort();
   const result = bothFilesKeys.reduce((acc, key) => {
-    const currentNode = nodeWriter(key, obj1, obj2, buildAST);
+    const currentNode = nodeWriter(key, data1, data2, buildAST);
     return [...acc, currentNode];
   }, []);
-  // console.log(JSON.stringify(result));
   return result;
 };
 export default buildAST;
