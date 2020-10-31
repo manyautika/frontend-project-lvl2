@@ -11,4 +11,4 @@ program
     const diff = genDiff(filePath1, filePath2, cmdObj.format);
     console.log(diff);
   })
-  .program.parse(process.argv);
+  .parse(process.argv);
