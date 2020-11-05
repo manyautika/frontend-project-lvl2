@@ -6,21 +6,29 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/108e0ed7654718b0e6b7/maintainability)](https://codeclimate.com/github/manyautika/frontend-project-lvl2/maintainability)
 ![CI](https://github.com/manyautika/frontend-project-lvl2/workflows/CI/badge.svg)
 
-# Requirements
-# frontend-project-lvl2
+# FRONTEND-PROJECT-LVL2
 ### Requirements
 * Mac/Linux
 * Node & npm
+### Setup
 
-#### Compare two .yaml files
+```
+$ make install
+```
+### Run tests
+
+```
+$ make test
+```
+#### Compare two .yaml, .json  of .ini files
 
 [![asciicast](https://asciinema.org/a/367645.svg)](https://asciinema.org/a/367645)
 
-#### Compare two .json files
+
 
 [![asciicast](https://asciinema.org/a/367647.svg)](https://asciinema.org/a/367647)
 
-#### Compare two .ini files
+
 
 [![asciicast](https://asciinema.org/a/367650.svg)](https://asciinema.org/a/367650)
 

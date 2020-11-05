@@ -8,5 +8,6 @@ export default (content, format) => {
     '.json': JSON.parse,
     '.ini': ini.parse,
   };
-  return parseFunctions[format](content);
+  const parseFunction = parseFunctions[format];
+  return parseFunction(content);
 };
