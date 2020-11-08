@@ -1,35 +1,35 @@
 import _ from 'lodash';
 
-const buildSpace = (n) => '  '.repeat(n);
+const buildIndent = (nest) => '  '.repeat(nest);
 
-const valueFormater = (data, space) => {
-  if (!_.isObject(data)) {
+const stringify = (data, nest) => {
+  if (!_.isPlainObject(data)) {
     return data;
   }
-  const currentSpace = space + 2;
+  const currentNest = nest + 2;
   const keys = Object.keys(data);
   const result = keys.flatMap((key) => {
     const value = data[key];
-    const newData = _.isObject(value)
-      ? ['\n  ', buildSpace(currentSpace), key, ': ', valueFormater(value, currentSpace)]
-      : ['\n  ', buildSpace(currentSpace), key, ': ', value];
+    const newData = _.isPlainObject(value)
+      ? `\n${buildIndent(currentNest + 1)}${key}: ${stringify(value, currentNest)}`
+      : `\n${buildIndent(currentNest + 1)}${key}: ${value}`;
     return newData;
   });
-  return `{${result.join('')}\n${buildSpace(currentSpace - 1)}}`;
+  return `{${result.join('')}\n${buildIndent(currentNest - 1)}}`;
 };
 const prepareNodeForRender = {
-  nested: (node, space, stylish) => {
-    const currentSpace = space + 2;
-    return [buildSpace(space), '  ', node.key, ': {\n', stylish(node.children, currentSpace), buildSpace(currentSpace - 1), '}\n'];
+  nested: (node, nest, stylish) => {
+    const currentNest = nest + 2;
+    return `${buildIndent(nest)}  ${node.key}: {\n${stylish(node.children, currentNest)}\n${buildIndent(currentNest - 1)}}`;
   },
-  unchanged: (node, space) => [buildSpace(space), '  ', node.key, ': ', valueFormater(node.value, space), '\n'],
-  added: (node, space) => [buildSpace(space), '+ ', node.key, ': ', valueFormater(node.value, space), '\n'],
-  removed: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.value, space), '\n'],
-  updated: (node, space) => [buildSpace(space), '- ', node.key, ': ', valueFormater(node.valueBefore, space), '\n', buildSpace(space), '+ ', node.key, ': ', valueFormater(node.valueAfter, space), '\n'],
+  unchanged: (node, nest) => `${buildIndent(nest)}  ${node.key}: ${stringify(node.value, nest)}`,
+  added: (node, nest) => `${buildIndent(nest)}+ ${node.key}: ${stringify(node.value, nest)}`,
+  removed: (node, nest) => `${buildIndent(nest)}- ${node.key}: ${stringify(node.value, nest)}`,
+  updated: (node, nest) => `${buildIndent(nest)}- ${node.key}: ${stringify(node.valueBefore, nest)}\n${buildIndent(nest)}+ ${node.key}: ${stringify(node.valueAfter, nest)}`,
 };
-const stylish = (tree, space = 1) => tree.flatMap((node) => {
-  const stateFunc = prepareNodeForRender[node.state];
-  return stateFunc(node, space, stylish);
-}).join('');
+const stylish = (tree, nest = 1) => tree.flatMap((node) => {
+  const handler = prepareNodeForRender[node.type];
+  return handler(node, nest, stylish);
+}).join('\n');
 
-export default (tree) => `{\n${stylish(tree)}}`;
+export default (tree) => `{\n${stylish(tree)}\n}`;

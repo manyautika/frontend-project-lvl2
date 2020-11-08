@@ -14,12 +14,12 @@ const readFixture = (formatter) => {
 };
 const fileType = ['json', 'yaml', 'ini'];
 
-test.each(fileType)('extension: %s', (extension) => {
+test.each(fileType)('format: %s', (extension) => {
+  const file1 = getPath(`file1.${extension}`);
+  const file2 = getPath(`file2.${extension}`);
   const stylish = readFixture('stylish');
   const plain = readFixture('plain');
   const json = readFixture('json');
-  const file1 = getPath(`file1.${extension}`);
-  const file2 = getPath(`file2.${extension}`);
   expect(genDiff(file1, file2, 'stylish')).toBe(stylish);
   expect(genDiff(file1, file2, 'plain')).toBe(plain);
   expect(genDiff(file1, file2, 'json')).toBe(json);

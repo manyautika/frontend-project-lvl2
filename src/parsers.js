@@ -8,6 +8,6 @@ export default (content, format) => {
     json: JSON.parse,
     ini: ini.parse,
   };
-  const parseFunction = parseFunctions[format];
-  return parseFunction(content);
+  const parse = parseFunctions[format];
+  return parse(content);
 };
