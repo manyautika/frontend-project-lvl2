@@ -20,7 +20,7 @@ const nodeTypesTable = [
   {
     check: (key, obj1, obj2) => obj1[key] !== obj2[key],
     build: (key, obj1, obj2) => ({
-      key, type: 'updated', valueBefore: obj1[key], valueAfter: obj2[key],
+      key, type: 'updated', old: obj1[key], new: obj2[key],
     }),
   },
 ];

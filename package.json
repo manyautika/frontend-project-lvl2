@@ -1,7 +1,7 @@
 {
   "name": "frontend-project-lvl2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gendiff it is a cli utility that can help you to generate differens betwen two json, yaml or ini files. ",
   "main": "index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"

@@ -7,6 +7,8 @@
 ![CI](https://github.com/manyautika/frontend-project-lvl2/workflows/CI/badge.svg)
 
 # FRONTEND-PROJECT-LVL2
+## Gendiff 
+### Gendiff it is a cli utility that can help you to generate differens betwen two json, yaml or ini files. 
 ### Requirements
 * Mac/Linux
 * Node & npm

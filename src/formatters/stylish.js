@@ -1,35 +1,35 @@
 import _ from 'lodash';
 
-const buildIndent = (nest) => '  '.repeat(nest);
+const buildIndent = (depth) => ' '.repeat(4 * depth - 2);
 
-const stringify = (data, nest) => {
+const stringify = (data, depth) => {
   if (!_.isPlainObject(data)) {
     return data;
   }
-  const currentNest = nest + 2;
+  const currentDepth = depth + 1;
   const keys = Object.keys(data);
   const result = keys.flatMap((key) => {
     const value = data[key];
     const newData = _.isPlainObject(value)
-      ? `\n${buildIndent(currentNest + 1)}${key}: ${stringify(value, currentNest)}`
-      : `\n${buildIndent(currentNest + 1)}${key}: ${value}`;
+      ? `${buildIndent(currentDepth)}  ${key}: ${stringify(value, currentDepth)}`
+      : `${buildIndent(currentDepth)}  ${key}: ${stringify(value, currentDepth)}`;
     return newData;
   });
-  return `{${result.join('')}\n${buildIndent(currentNest - 1)}}`;
+  return `{\n${result.join('\n')}\n${buildIndent(depth)}  }`;
 };
 const prepareNodeForRender = {
-  nested: (node, nest, stylish) => {
-    const currentNest = nest + 2;
-    return `${buildIndent(nest)}  ${node.key}: {\n${stylish(node.children, currentNest)}\n${buildIndent(currentNest - 1)}}`;
+  nested: (node, depth, generate) => {
+    const currentDepth = depth + 1;
+    return `${buildIndent(depth)}  ${node.key}: {\n${generate(node.children, currentDepth)}\n${buildIndent(depth)}  }`;
   },
-  unchanged: (node, nest) => `${buildIndent(nest)}  ${node.key}: ${stringify(node.value, nest)}`,
-  added: (node, nest) => `${buildIndent(nest)}+ ${node.key}: ${stringify(node.value, nest)}`,
-  removed: (node, nest) => `${buildIndent(nest)}- ${node.key}: ${stringify(node.value, nest)}`,
-  updated: (node, nest) => `${buildIndent(nest)}- ${node.key}: ${stringify(node.valueBefore, nest)}\n${buildIndent(nest)}+ ${node.key}: ${stringify(node.valueAfter, nest)}`,
+  unchanged: (node, depth) => `${buildIndent(depth)}  ${node.key}: ${stringify(node.value, depth)}`,
+  added: (node, depth) => `${buildIndent(depth)}+ ${node.key}: ${stringify(node.value, depth)}`,
+  removed: (node, depth) => `${buildIndent(depth)}- ${node.key}: ${stringify(node.value, depth)}`,
+  updated: (node, depth) => `${buildIndent(depth)}- ${node.key}: ${stringify(node.old, depth)}\n${buildIndent(depth)}+ ${node.key}: ${stringify(node.new, depth)}`,
 };
-const stylish = (tree, nest = 1) => tree.flatMap((node) => {
+const generate = (tree, depth = 1) => tree.flatMap((node) => {
   const handler = prepareNodeForRender[node.type];
-  return handler(node, nest, stylish);
+  return handler(node, depth, generate);
 }).join('\n');
 
-export default (tree) => `{\n${stylish(tree)}\n}`;
+export default (tree) => `{\n${generate(tree)}\n}`;
