@@ -15,7 +15,7 @@ const prepareNodeForRender = {
   added: (node, keys) => (`Property '${keys.join('.')}' was added with value: ${stringify(node.value)}`),
   removed: (node, keys) => (`Property '${keys.join('.')}' was removed`),
   updated: (node, keys) => (`Property '${keys.join('.')}' was updated. From ${stringify(node.old)} to ${stringify(node.new)}`),
-  unchanged: () => (null),
+  unchanged: () => ([]),
 };
 
 export default (tree) => {
@@ -27,5 +27,5 @@ export default (tree) => {
     }, []);
     return result;
   };
-  return generate(tree).filter((item) => item !== null).join('\n');
+  return generate(tree).join('\n');
 };

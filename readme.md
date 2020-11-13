@@ -8,7 +8,7 @@
 
 # FRONTEND-PROJECT-LVL2
 ## Gendiff 
-### Gendiff it is a cli utility that can help you to generate differens betwen two json, yaml or ini files. 
+Gendiff it is a cli utility that can help you to generate differens betwen two json, yaml or ini files. 
 ### Requirements
 * Mac/Linux
 * Node & npm
