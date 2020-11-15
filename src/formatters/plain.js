@@ -10,7 +10,7 @@ const stringify = (value) => {
   return value;
 };
 
-const prepareNodeForRender = {
+const mapping = {
   nested: (node, keys, generate) => generate(node.children, keys),
   added: (node, keys) => (`Property '${keys.join('.')}' was added with value: ${stringify(node.value)}`),
   removed: (node, keys) => (`Property '${keys.join('.')}' was removed`),
@@ -20,11 +20,7 @@ const prepareNodeForRender = {
 
 export default (tree) => {
   const generate = (arr, keys = []) => {
-    const result = arr.flatMap((node) => {
-      const prorerty = [...keys, node.key];
-      const handler = prepareNodeForRender[node.type];
-      return handler(node, prorerty, generate);
-    }, []);
+    const result = arr.flatMap((node) => mapping[node.type](node, [...keys, node.key], generate));
     return result;
   };
   return generate(tree).join('\n');
