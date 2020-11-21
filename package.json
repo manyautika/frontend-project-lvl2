@@ -1,5 +1,5 @@
 {
-  "name": "frontend-project-lvl2",
+  "name": "@mariyautkina/frontend-project-lvl2",
   "version": "1.0.0",
   "description": "Gendiff it is a cli utility that can help you to generate differens betwen two json, yaml or ini files. ",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/manyautika/frontend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Maria Utkina",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/manyautika/frontend-project-lvl2/issues"
@@ -33,5 +33,15 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.20.0",
     "jest": "^26.4.2"
-  }
+  },
+  "keywords": [
+    "diff",
+    "gendiff",
+    "differens",
+    "files",
+    "yaml",
+    "json",
+    "ini",
+    "formatters"
+  ]
 }

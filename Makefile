@@ -1,7 +1,7 @@
 install:
 	npm install
 link:
-	sudo npm link
+	npm link
 publish:
 	npm publish --dry-run
 lint:

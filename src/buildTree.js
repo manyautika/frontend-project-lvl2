@@ -2,26 +2,26 @@ import _ from 'lodash';
 
 const nodeTypesTable = [
   {
-    check: (key, obj1, obj2) => _.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key]),
-    build: (key, obj1, obj2, buildTree) => ({ key, type: 'nested', children: buildTree(obj1[key], obj2[key]) }),
-  },
-  {
-    check: (key, obj1, obj2) => !_.has(obj1, key) && _.has(obj2, key),
+    check: (key, obj1) => !_.has(obj1, key),
     build: (key, obj1, obj2) => ({ key, type: 'added', value: obj2[key] }),
   },
   {
-    check: (key, obj1, obj2) => _.has(obj1, key) && !_.has(obj2, key),
+    check: (key, obj1, obj2) => !_.has(obj2, key),
     build: (key, obj1) => ({ key, type: 'removed', value: obj1[key] }),
   },
   {
-    check: (key, obj1, obj2) => obj1[key] === obj2[key],
-    build: (key, obj1) => ({ key, type: 'unchanged', value: obj1[key] }),
+    check: (key, obj1, obj2) => _.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key]),
+    build: (key, obj1, obj2, buildTree) => ({ key, type: 'nested', children: buildTree(obj1[key], obj2[key]) }),
   },
   {
     check: (key, obj1, obj2) => obj1[key] !== obj2[key],
     build: (key, obj1, obj2) => ({
       key, type: 'updated', old: obj1[key], new: obj2[key],
     }),
+  },
+  {
+    check: (key, obj1, obj2) => obj1[key] === obj2[key],
+    build: (key, obj1) => ({ key, type: 'unchanged', value: obj1[key] }),
   },
 ];
 
