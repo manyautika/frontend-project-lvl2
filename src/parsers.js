@@ -6,16 +6,13 @@ const iniParse = (rowData) => {
   const data = ini.parse(rowData);
 
   const generate = (obj) => {
-    const result = Object.keys(obj)
-      .reduce((acc, key) => {
-        if (_.isObject(obj[key])) {
-          return { ...acc, [key]: { ...generate(obj[key]) } };
-        }
-        const oldValue = parseInt(obj[key], 10);
-        const newValue = isNaN(oldValue) ? obj[key] : oldValue; // eslint-disable-line
-        const newAcc = { ...acc, [key]: newValue };
-        return newAcc;
-      }, {});
+    const result = _.mapValues(obj, (value) => {
+      if (_.isObject(value)) {
+        return generate(value);
+      }
+      const newValue = parseInt(value, 10);
+      return isNaN(newValue) ? value : newValue; // eslint-disable-line
+    });
     return result;
   };
 
