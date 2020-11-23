@@ -2,13 +2,15 @@ import yaml from 'js-yaml';
 import ini from 'ini';
 import _ from 'lodash';
 
+const isNumeric = (value) => Number.isNaN(value);
+
 const numerifyValues = (obj) => {
   const result = _.mapValues(obj, (value) => {
     if (_.isObject(value)) {
       return numerifyValues(value);
     }
     const newValue = parseFloat(value);
-    return Number.isNaN(newValue) ? value : newValue;
+    return isNumeric(newValue) ? value : newValue;
   });
   return result;
 };
