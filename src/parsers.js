@@ -7,8 +7,8 @@ const numerifyValues = (obj) => {
     if (_.isObject(value)) {
       return numerifyValues(value);
     }
-    const newValue = parseInt(value, 10);
-    return isNaN(newValue) ? value : newValue; // eslint-disable-line
+    const newValue = parseFloat(value);
+    return Number.isNaN(newValue) ? value : newValue;
   });
   return result;
 };
